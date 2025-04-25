@@ -21,7 +21,7 @@ HTML_TEMPLATE = """
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    color = request.form.get("color", "white")  # Default color is white
+    color = request.form.get("color", "clear")
     return render_template_string(HTML_TEMPLATE, color=color)
 
 if __name__ == "__main__":
