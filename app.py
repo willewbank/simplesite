@@ -8,6 +8,7 @@ INDEX_TEMPLATE = """
 <html>
 <head>
     <title>Colour guesser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 <h1>Your favorite colour guesser</h1>
@@ -26,6 +27,7 @@ COLOUR_TEMPLATE = """
 <html>
 <head>
     <title>Colour guesser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body style="background-color: {{ colour }};">
 <h1>Your favorite colour is {{colour}}</h1>
