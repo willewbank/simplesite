@@ -48,7 +48,7 @@ def index():
     return render_template_string(INDEX_TEMPLATE)
 
 @app.route("/colour", methods=["GET", "POST"])
-def index():
+def colour():
     colour = random.choice(colours)
     return render_template_string(COLOUR_TEMPLATE, colour=colour)
 
