@@ -47,11 +47,5 @@ def colour():
     colour = random.choice(colours)
     return render_template_string(COLOUR_TEMPLATE, colour=colour, name=name)
 
-@app.route("/colour", methods=["GET", "POST"])
-def colour():
-    name = request.args.get("name", "Guest")
-    colour = random.choice(colours)
-    return render_template_string(COLOUR_TEMPLATE, colour=colour, name=name)
-
 if __name__ == "__main__":
     app.run(debug=True)
