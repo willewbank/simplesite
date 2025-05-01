@@ -3,8 +3,6 @@ import random
 
 app = Flask(__name__)
 
-app.secret_key = "session"
-
 INDEX_TEMPLATE = """
 <!DOCTYPE html>
 <html>
@@ -37,20 +35,6 @@ COLOUR_TEMPLATE = """
 </html>
 """
 
-# <p>Is that right?</p>
-# <form action="/colour">
-#     <div style="display: flex; gap: 10px;">
-#         <div>
-#             <input type="radio" id="yes" name="correct" value="Yes" checked="checked">
-#             <label for="yes">Yes</label><br>
-#         </div>
-#         <div>
-#             <input type="radio" id="no" name="correct" value="No">
-#             <label for="no">No</label><br>
-#         </div>
-#   <input type="submit" value="Submit">
-# </form>
-
 colours = ['red', 'yellow', 'green', 'blue', 'orange', 'pink', 'purple']
 
 @app.route("/", methods=["GET", "POST"])
@@ -60,12 +44,12 @@ def index():
 @app.route("/colour", methods=["GET", "POST"])
 def colour():
     name = request.args.get("name", "Guest")
-    # if request.method == "POST":
-    #     user_choice = request.form.get("correct")
-    #     if user_choice == "No":
-    #         session["colour"] = random.choice(colours)
-    # if "colour" not in session:
-    #     session["colour"] = random.choice(colours)
+    colour = random.choice(colours)
+    return render_template_string(COLOUR_TEMPLATE, colour=colour, name=name)
+
+@app.route("/colour", methods=["GET", "POST"])
+def colour():
+    name = request.args.get("name", "Guest")
     colour = random.choice(colours)
     return render_template_string(COLOUR_TEMPLATE, colour=colour, name=name)
 
