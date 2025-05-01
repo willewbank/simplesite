@@ -33,10 +33,15 @@ COLOUR_TEMPLATE = """
 <h1>Your favorite colour is {{colour}}</h1>
 <p>Is that right?</p>
 <form action="/colour">
-  <input type="radio" id="yes" name="correct" value="Yes" checked="checked">
-  <label for="html">Yes</label><br>
-  <input type="radio" id="no" name="correct" value="No">
-  <label for="css">No</label><br>
+    <div style="display: flex; gap: 10px;">
+        <div>
+            <input type="radio" id="yes" name="correct" value="Yes" checked="checked">
+            <label for="yes">Yes</label><br>
+        </div>
+        <div>
+            <input type="radio" id="no" name="correct" value="No">
+            <label for="no">No</label><br>
+        </div>
   <input type="submit" value="Submit">
 </form>
 </body>
