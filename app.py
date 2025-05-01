@@ -1,7 +1,9 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, session
 import random
 
 app = Flask(__name__)
+
+app.secret_key = "session"
 
 INDEX_TEMPLATE = """
 <!DOCTYPE html>
@@ -56,8 +58,13 @@ def index():
 
 @app.route("/colour", methods=["GET", "POST"])
 def colour():
-    colour = random.choice(colours)
-    return render_template_string(COLOUR_TEMPLATE, colour=colour)
+    if request.method == "POST":
+        user_choice = request.form.get("correct")
+        if user_choice == "No":
+            session["colour"] = random.choice(colours)
+    if "colour" not in session:
+        session["colour"] = random.choice(colours)
+    return render_template_string(COLOUR_TEMPLATE, colour=session["colour"])
 
 if __name__ == "__main__":
     app.run(debug=True)
