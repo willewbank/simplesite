@@ -32,7 +32,7 @@ COLOUR_TEMPLATE = """
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body style="background-color: {{ colour }};">
-<h1>Your favorite colour is {{colour}}</h1>
+<h1>{{name}}'s favorite colour is {{colour}}</h1>
 <p>Is that right?</p>
 <form action="/colour">
     <div style="display: flex; gap: 10px;">
@@ -50,7 +50,7 @@ COLOUR_TEMPLATE = """
 </html>
 """
 
-colours = ['red', 'yellow', 'green', 'blue', 'orange']
+colours = ['red', 'yellow', 'green', 'blue', 'orange', 'pink', 'purple']
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -58,13 +58,14 @@ def index():
 
 @app.route("/colour", methods=["GET", "POST"])
 def colour():
+    name = request.args.get("name", "Guest")
     if request.method == "POST":
         user_choice = request.form.get("correct")
         if user_choice == "No":
             session["colour"] = random.choice(colours)
     if "colour" not in session:
         session["colour"] = random.choice(colours)
-    return render_template_string(COLOUR_TEMPLATE, colour=session["colour"])
+    return render_template_string(COLOUR_TEMPLATE, colour=session["colour"], name=name)
 
 if __name__ == "__main__":
     app.run(debug=True)
