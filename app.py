@@ -31,6 +31,10 @@ COLOUR_TEMPLATE = """
 </head>
 <body style="background-color: {{ colour }};">
 <h1>{{name}}'s favorite colour is {{colour}}</h1>
+<p>Did I get that right? Hit try again to go back to the start.</p>
+<form action="/colour">
+    <input type="submit" value="Try Again">
+</form>
 </body>
 </html>
 """
